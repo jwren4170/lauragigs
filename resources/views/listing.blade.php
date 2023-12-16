@@ -1,24 +1,19 @@
 @extends('layout')
 
-
 @section('content')
     <a href="/" class="inline-block text-black ml-4 mb-4"><i class="fa-solid fa-arrow-left"></i> Back
     </a>
     @include('partials._search')
     <div class="mx-4">
-        <div class="bg-gray-50 border border-gray-200 p-10 rounded">
+        <x-card>
             <div class="flex flex-col items-center justify-center text-center">
                 <img class="w-48 mr-6 mb-6" src="{{ asset('images/no-image.png') }}" alt="" />
 
                 <h3 class="text-3xl font-bold mb-2">{{ $listing->title }}</h3>
                 <div class="text-xl font-bold mb-4">{{ $listing->company }}</div>
-                <ul class="flex">
-                    @foreach (explode(' ', $listing->tags) as $tag)
-                        <li class="flex items-center justify-center bg-black text-white rounded-xl py-1 px-3 mr-2 text-xs">
-                            <a href="#"> {{ $tag }} </a>
-                        </li>
-                    @endforeach
-                </ul>
+
+                <x-tags :listingTags="$listing->tags" />
+
                 <div class="text-lg my-4">
                     <i class="fa-solid fa-location-dot"></i> {{ $listing->location }}
                 </div>
@@ -42,6 +37,6 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </x-card>
     </div>
 @endsection
